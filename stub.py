@@ -23,17 +23,17 @@ TEMPLATE = '''#!/usr/bin/env python
 
 PROBLEM = {{problem}}
 SOLVED = False
-SPEED = float("inf")
+SPEED = float('inf')
 TAGS = []
 
 
 def main():
     """Solve problem."""
-    print "Project Euler: %04d" % PROBLEM
-    print "Unsolved"
+    print 'Project Euler: %04d' % PROBLEM
+    print 'Unsolved'
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()'''
 
 

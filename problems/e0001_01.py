@@ -16,7 +16,7 @@ import sys
 
 PROBLEM = 1
 SOLVED = True
-SPEED = float("0.02")
+SPEED = float('0.02')
 TAGS = ['partial_sum']
 
 
@@ -47,12 +47,12 @@ def calculate_brute(maxvalue):
 
 def main():
     """Solve problem."""
-    print "Project Euler: %04d" % PROBLEM
+    print 'Project Euler: %04d' % PROBLEM
     maxvalue = 1000
     if len(sys.argv) > 1:
         maxvalue = int(sys.argv[1])
     print calculate(maxvalue)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
