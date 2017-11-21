@@ -16,7 +16,7 @@ import sys
 
 PROBLEM = 10
 SOLVED = True
-SPEED = 0.55
+SPEED = 0.54
 TAGS = ['primes', 'prime_sieve']
 
 
@@ -134,11 +134,7 @@ def main():
     maximum = 2000000
     if len(sys.argv) > 1:
         maximum = int(sys.argv[1])
-    total = 0
-    for prime in Primes(maximum=maximum):
-        total += prime
-    print total
-    # print Primes.known_primes
+    print sum(Primes(maximum=maximum))
 
 
 if __name__ == '__main__':

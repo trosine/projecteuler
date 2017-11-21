@@ -102,10 +102,7 @@ def main():
     maximum = 2000000
     if len(sys.argv) > 1:
         maximum = int(sys.argv[1])
-    total = 0
-    for prime in Primes(maximum=maximum):
-        total += prime
-    print total
+    print sum(Primes(maximum=maximum))
 
 
 if __name__ == '__main__':
