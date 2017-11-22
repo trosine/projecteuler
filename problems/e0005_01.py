@@ -81,10 +81,9 @@ class Primes(object):
         """Returns a list of prime factors that this number is composed of"""
         factors = []
         for prime in cls():
-            # print 'Checking to see if %d is a factor of %d' % (prime, number)
-            if prime == number:
-                factors.append(prime)
+            if prime > number:
                 break
+            # print 'Checking to see if %d is a factor of %d' % (prime, number)
             # reduce the total iterations
             if prime > math.sqrt(number):
                 factors.append(number)
@@ -92,10 +91,6 @@ class Primes(object):
             while not number % prime:
                 number /= prime
                 factors.append(prime)
-                # case for squares (which are divisible)
-                if prime == number:
-                    factors.append(prime)
-                    break
         return factors
 
 
