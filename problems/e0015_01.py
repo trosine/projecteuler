@@ -18,7 +18,7 @@ import sys
 PROBLEM = 15
 SOLVED = True
 SPEED = 0.02
-TAGS = ['combinations']
+TAGS = ['combinations', 'lattice_path', 'path']
 
 def choose(objects, picks):
     """Return the number of combinations (nCr)"""
