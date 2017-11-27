@@ -12,8 +12,8 @@ What is the sum of the digits of the number 2 ** 1000?
 """
 
 PROBLEM = 16
-SOLVED = False
-SPEED = float('inf')
+SOLVED = True
+SPEED = 0.02
 TAGS = []
 
 
