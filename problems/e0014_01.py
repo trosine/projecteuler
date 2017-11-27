@@ -8,9 +8,8 @@ Longest Collatz sequence
 
 The following iterative sequence is defined for the set of positive integers:
 
-n → n/2 ( n is even)
-
-n → 3n + 1 ( n is odd)
+n → n/2 (n is even)
+n → 3n + 1 (n is odd)
 
 Using the rule above and starting with 13, we generate the following sequence:
 
@@ -22,9 +21,7 @@ that all starting numbers finish at 1.
 
 Which starting number, under one million, produces the longest chain?
 
-NOTE:
-
-Once the chain starts the terms are allowed to go above one million.
+NOTE: Once the chain starts the terms are allowed to go above one million.
 """
 
 import sys
