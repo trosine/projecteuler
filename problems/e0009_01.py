@@ -82,6 +82,7 @@ TAGS = ['pythagorean']
 
 def main():
     """Solve problem."""
+    # pylint: disable=locally-disabled, invalid-name
     print 'Project Euler: %04d' % PROBLEM
     target = 1000
     if len(sys.argv) > 1:
