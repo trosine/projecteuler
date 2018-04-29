@@ -91,7 +91,8 @@ def get_families(length, minimum=1):
     # replace at least 2: replacing only 1 digit means 3 are divisible by 3
     for number_to_replace in xrange(2, length):
         print 'Replacing %d of %d digits' % (number_to_replace, length)
-        for replaced_digits in itertools.combinations(all_digits, number_to_replace):
+        combinations = itertools.combinations(all_digits, number_to_replace)
+        for replaced_digits in combinations:
             static_digits = all_digits.difference(replaced_digits)
             for base in get_bases(length, list(static_digits)):
                 family = prime_replacements(base, replaced_digits)
@@ -115,6 +116,7 @@ def main():
         if smallest:
             break
     print 'Answer: %d' % (smallest, )
+
 
 if __name__ == '__main__':
     PRIMES = set(sieve(1000000))
