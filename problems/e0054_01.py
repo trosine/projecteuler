@@ -57,11 +57,9 @@ winner.
 How many hands does Player 1 win?
 """
 
-import itertools
-
 PROBLEM = 54
 SOLVED = True
-SPEED = float('0.083')
+SPEED = float('0.068')
 TAGS = ['poker']
 
 
@@ -79,11 +77,15 @@ class PokerHand(object):
     def __init__(self, cards):
         self.cards = cards
         self.values = []
+        self.groups = {}
         suits = []
         for card in cards:
             value = int(self._values.get(card[0], card[0]))
             self.values.append(value)
             suits.append(card[1])
+            self.groups.setdefault(value, 0)
+            self.groups[value] += 1
+
         self.values.sort(reverse=True)
         self.is_flush = suits == [suits[0]] * 5
         high_card = self.values[0]
@@ -92,9 +94,7 @@ class PokerHand(object):
 
     def _reorder(self):
         """Order the card values to ease comparison"""
-        intermediate = []
-        for value, group in itertools.groupby(self.values):
-            intermediate.append((len(list(group)), value))
+        intermediate = [(val, key) for key, val in self.groups.items()]
         self.values = []
         for count, value in sorted(intermediate, reverse=True):
             self.values += [value] * count
@@ -118,8 +118,8 @@ class PokerHand(object):
         # fullhs = 1*3^3 + 1*2^3 = 35
         # 4/kind = 1*4^3 + 1*1^3 = 65
         rank = 0
-        for _, group in itertools.groupby(self.values):
-            rank += len(list(group)) ** 3
+        for group in self.groups.values():
+            rank += group ** 3
         # special cases
         if self.is_straight and self.is_flush:
             rank = 70
