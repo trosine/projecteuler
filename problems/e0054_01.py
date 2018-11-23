@@ -57,6 +57,8 @@ winner.
 How many hands does Player 1 win?
 """
 
+import euler
+
 PROBLEM = 54
 SOLVED = True
 SPEED = float('0.068')
@@ -134,7 +136,7 @@ def main():
     """Solve problem."""
     print 'Project Euler: %04d' % PROBLEM
     wins = 0
-    with open('fixtures/d%04d.txt' % PROBLEM) as hands:
+    with euler.Resource('poker.txt') as hands:
         for hand in hands:
             cards = hand.split()
             hand1 = PokerHand(cards[:5])
