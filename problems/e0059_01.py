@@ -35,6 +35,8 @@ the ASCII values in the original text.
 
 import itertools
 
+import euler
+
 PROBLEM = 59
 SOLVED = True
 SPEED = float('1.897')
@@ -56,7 +58,7 @@ def decrypt(message, key):
 
 def load_data():
     """Load data file"""
-    with open('fixtures/d%04d.txt' % PROBLEM) as datafile:
+    with euler.Resource('cipher.txt') as datafile:
         data = datafile.readline()
     return [int(char) for char in data.split(',')]
 
