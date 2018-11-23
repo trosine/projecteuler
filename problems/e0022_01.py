@@ -18,7 +18,7 @@ obtain a score of 938 × 53 = 49714.
 What is the total of all the name scores in the file?
 """
 
-import sys
+import euler
 
 PROBLEM = 22
 SOLVED = True
@@ -26,10 +26,10 @@ SPEED = 0.03
 TAGS = ['alphabetic_value']
 
 
-def load_data(filename):
+def load_data():
     """Returns the parsed dataset from filename."""
     data = None
-    with open(filename) as infile:
+    with euler.Resource('names.txt') as infile:
         data = infile.readline()
     data = data.strip('"').split('","')
     data.sort()
@@ -44,12 +44,9 @@ def alphabetic_value(name):
 def main():
     """Solve problem."""
     print 'Project Euler: %04d' % PROBLEM
-    filename = 'fixtures/d%04d.txt' % (PROBLEM)
-    if len(sys.argv) > 1:
-        filename = sys.argv[1]
 
     total = 0
-    names = load_data(filename)
+    names = load_data()
     for index in xrange(0, len(names)):
         total += (index+1) * alphabetic_value(names[index])
     print total
