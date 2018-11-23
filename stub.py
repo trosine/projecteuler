@@ -4,37 +4,14 @@
 import argparse
 import os
 import textwrap
+import urlparse
 
 import bs4
 import jinja2
 import requests
 
 EULER_URL = r"https://projecteuler.net/problem=%s"
-TEMPLATE = '''#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
-"""Project Euler: {{index}}
-
-{{url}}
-
-{{title}}
-
-{{description}}
-"""
-
-PROBLEM = {{problem}}
-SOLVED = False
-SPEED = float('inf')
-TAGS = []
-
-
-def main():
-    """Solve problem."""
-    print 'Project Euler: %04d' % PROBLEM
-    print 'Unsolved'
-
-
-if __name__ == '__main__':
-    main()'''
+TEMPLATE = "resources/stub.py.j2"
 
 
 def problem_attributes(problem_number):
@@ -51,8 +28,25 @@ def problem_attributes(problem_number):
         "description": description,
         "index": "%04d" % problem_number,
         "problem": problem_number,
+        "resources": [
+            a.get("href")
+            for a in soup.find_all("a")
+            if "resources" in a.get("href")
+            ],
         "title": title,
-        "url": url}
+        "url": url,
+        }
+
+
+def get_resource(url, resource):
+    """Download additional resource into standard path"""
+    resource_url = urlparse.urljoin(url, resource)
+    filename = "resources/" + resource.rsplit("/", 1)[-1]
+    request = requests.get(resource_url, stream=True)
+    with open(filename, "wb") as res_file:
+        for chunk in request.iter_content():
+            res_file.write(chunk)
+    print "Wrote %s" % filename
 
 
 def main():
@@ -65,7 +59,9 @@ def main():
             print "%s already exists, not overwriting without -f" % filename
             return
 
-    template = jinja2.Template(TEMPLATE)
+    with open(TEMPLATE) as template_file:
+        template_content = template_file.read()
+    template = jinja2.Template(template_content)
     attribs = problem_attributes(ARGS.problem_number)
     data = template.render(attribs).encode("UTF-8")
     if ARGS.use_stdout:
@@ -74,6 +70,8 @@ def main():
         open(filename, "w").write(data+"\n")
         print "Wrote %s" % filename
         os.chmod(filename, 0755)
+        for resource in attribs["resources"]:
+            get_resource(attribs["url"], resource)
 
 
 if __name__ == "__main__":
