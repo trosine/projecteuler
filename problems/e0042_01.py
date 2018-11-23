@@ -22,16 +22,18 @@ containing nearly two-thousand common English words, how many are triangle
 words?
 """
 
+import euler
+
 PROBLEM = 42
 SOLVED = True
 SPEED = 0.03
 TAGS = ['triangle_numbers', 'triangle_words']
 
 
-def load_data(filename):
+def load_data():
     """Parse the words from filename."""
     data = None
-    with open(filename) as infile:
+    with euler.Resource('words.txt') as infile:
         data = infile.readline()
     data = data.strip('"').split('","')
     return data
@@ -49,7 +51,7 @@ def main():
     for number in range(1, 1000):
         triangle = number * (number+1) / 2
         triangles[triangle] = True
-    words = load_data('fixtures/d%04d.txt' % PROBLEM)
+    words = load_data()
     total = 0
     for word in words:
         value = word_value(word)
