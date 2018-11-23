@@ -30,18 +30,21 @@ containing one-hundred rows; it cannot be solved by brute force, and requires a
 clever method! ;o)
 """
 
-import sys
+import euler
 
+# this and problem 67 are identical, just with different data sets
 PROBLEM = 18
+if '0067' in __file__:
+    PROBLEM = 67
 SOLVED = True
 SPEED = 0.02
 TAGS = ['max_path_sum']
 
 
-def load_data(filename):
+def load_data():
     """Returns the triangular dataset *inverted* and converted to integers"""
     data = []
-    with open(filename) as datafile:
+    with euler.Resource('triangle.txt') as datafile:
         for line in datafile.readlines():
             data.insert(0, map(int, line.strip().split()))
     return data
@@ -53,11 +56,7 @@ def load_data(filename):
 def main():
     """Solve problem."""
     print 'Project Euler: %04d' % PROBLEM
-    filename = 'fixtures/d%04d.txt' % (PROBLEM)
-    if len(sys.argv) > 1:
-        filename = sys.argv[1]
-
-    data = load_data(filename)
+    data = load_data()
     for row in xrange(1, len(data)):
         for col in xrange(len(data[row])):
             data[row][col] += max(data[row-1][col:col+2])
