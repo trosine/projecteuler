@@ -123,12 +123,12 @@ class Primes(object):
         return factors
 
 
-def main():
+def main(args=sys.argv[1:]):
     """Solve problem."""
     print 'Project Euler: %04d' % PROBLEM
     maximum = 2000000
-    if len(sys.argv) > 1:
-        maximum = int(sys.argv[1])
+    if len(args) > 0:
+        maximum = int(args[0])
     print sum(Primes(maximum=maximum))
 
 
