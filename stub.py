@@ -31,7 +31,7 @@ def problem_attributes(problem_number):
         "resources": [
             a.get("href")
             for a in soup.find_all("a")
-            if "resources" in a.get("href")
+            if "resources" in a.get("href", '')
             ],
         "title": title,
         "url": url,
